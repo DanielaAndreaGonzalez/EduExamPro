@@ -1,0 +1,9 @@
+<div class="mb-4">
+  <p>{{ question.text }}</p>
+  <div *ngFor="let option of question.options" class="form-check">
+    <input class="form-check-input" type="radio" name="question{{question.text}}" (click)="selectOption(option)">
+    <label class="form-check-label">
+      {{ option }}
+    </label>
+  </div>
+</div>

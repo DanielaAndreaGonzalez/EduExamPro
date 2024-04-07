@@ -1,0 +1,7 @@
+<div class="container my-4">
+  <h3>Examen</h3>
+  <form (ngSubmit)="submitExam()">
+    <app-question *ngFor="let question of questions" [question]="question"></app-question>
+    <button type="submit" class="btn btn-success">Enviar Examen</button>
+  </form>
+</div>

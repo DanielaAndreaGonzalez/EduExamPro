@@ -1,0 +1,27 @@
+<div class="container my-4">
+  <hr>
+  <h3>Agregar Pregunta</h3>
+  <div class="mb-3">
+    <textarea class="form-control" placeholder="Escribe aquí tu pregunta" [(ngModel)]="question" rows="2"></textarea>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let option of options; let i = index">
+      <div class="input-group">
+        <div class="input-group-text">
+          <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="option.isCorrect" aria-label="Checkbox para marcar respuesta correcta">
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="option.text" placeholder="Opción {{ i + 1 }}">
+        <button class="btn btn-outline-danger" type="button" (click)="removeOption(i)">Eliminar</button>
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn-link" (click)="addOption()">+ Agregar Opción</button>
+  <div class="mt-3">
+    <button class="btn btn-primary" (click)="saveQuestion()">Guardar</button>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="requiredQuestion">
+      <label class="form-check-label" for="requiredQuestion">Pregunta requerida</label>
+    </div>
+    <!-- Añadir selector para el tipo de pregunta si es necesario -->
+  </div>
+</div>

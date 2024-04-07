@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Creación de Quizzes</h2>
+  <form>
+    <div class="mb-3">
+      <label for="quizTitle" class="form-label">Título del Quiz</label>
+      <input type="text" class="form-control" id="quizTitle" placeholder="Ingresa el título del quiz" required>
+    </div>
+    <div class="mb-3">
+      <label for="quizDescription" class="form-label">Descripción del Quiz</label>
+      <textarea class="form-control" id="quizDescription" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="quizCategory" class="form-label">Elige una Categoría</label>
+      <select class="form-select" id="quizCategory" required>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <!-- Continúa agregando controles para cantidad de preguntas, tiempo, etc. -->
+    <button type="submit" class="btn btn-primary">Crear Quiz</button>
+  </form>
+</div>
