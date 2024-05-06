@@ -1,2 +1,41 @@
-<app-quiz-form [categories]="categories"></app-quiz-form>
-<app-question-create></app-question-create>
+<div class="container mt-5">
+  <h2 class="mb-4">Creación de Quizzes</h2>
+  <form (ngSubmit)="createQuiz()">
+    <div class="mb-3">
+      <label for="quizTitle" class="form-label">Título del Quiz</label>
+      <input type="text" class="form-control" id="quizTitle" name="quizTitle" placeholder="Ingresa el título del quiz" required
+      [(ngModel)]="quiz.nombre">
+    </div>
+    <div class="mb-3">
+      <label for="quizDescription" class="form-label">Descripción del Quiz</label>
+      <textarea class="form-control" id="quizDescription" name="quizDescription" rows="3" required [(ngModel)]="quiz.descripcion"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="quizCategory" class="form-label">Elige una Categoría</label>
+      <select class="form-select" id="quizCategory" name="quizCategory" [(ngModel)]="quiz.categoria" required>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="fechaDisponible">Fecha Disponible</label>
+      <input type="date" class="form-control" name="fechaDisponible" id="fechaDisponible" [(ngModel)]="quiz.fechaDisponible">
+    </div>
+
+    <div class="mb-3">
+      <label for="tiempoLimite">Tiempo Límite (minutos)</label>
+      <input type="number" class="form-control" name="tiempoLimite" id="tiempoLimite" [(ngModel)]="quiz.tiempoLimite">
+    </div>
+
+    <div class="mb-3">
+      <label for="curso">Curso</label>
+      <select class="form-control" id="curso" name="curso" [(ngModel)]="quiz.idCurso">
+        <option *ngFor="let curso of cursos" [value]="curso.idCurso">{{ curso.nombre }}</option>
+      </select>
+    </div>
+    <!-- Continúa agregando controles para cantidad de preguntas, tiempo, etc. -->
+    <button type="submit" class="btn btn-primary">Crear Quiz</button>
+  </form>
+</div>
+
+
+<!--<app-question-create></app-question-create>-->

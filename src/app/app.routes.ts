@@ -4,7 +4,7 @@ import { QuestionCreateComponent } from './component/question-create/question-cr
 import { ExamComponent } from './component/exam/exam.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/create-quiz', pathMatch: 'full' },
+  { path: '', redirectTo: '/crear-quiz', pathMatch: 'full' },
   { path: 'crear-quiz', component: QuizCreateComponent },
   { path: 'crear-pregunta', component: QuestionCreateComponent },
   { path: 'tomar-examen', component: ExamComponent },
