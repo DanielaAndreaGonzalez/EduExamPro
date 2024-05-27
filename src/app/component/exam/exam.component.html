@@ -1,7 +1,57 @@
 <div class="container my-4">
+  <!--Lista de quizzes-->
+  <div class="container mt-3">
+    <h2>Mis quizzes pendientes</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Descripción</th>
+          <th>Tiempo Límite</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quiz of quizzes">
+          <td>{{ quiz.nombre }}</td>
+          <td>{{ quiz.descripcion }}</td>
+          <td>{{ quiz.tiempoLimite }} minutos</td>
+          <td>
+            <button class="btn btn-primary" (click)="respondeQuiz(quiz.idExamen)">Responder</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
   <h3>Examen</h3>
-  <form (ngSubmit)="submitExam()">
-    <app-question *ngFor="let question of questions" [question]="question"></app-question>
-    <button type="submit" class="btn btn-success">Enviar Examen</button>
-  </form>
+  @if (infoQuizPreguntas) {
+    @for (pregunta of infoQuizPreguntas.preguntas; track $index) {
+      <div class="border p-2 mt-2">
+        <div>
+          <p>{{pregunta.texto}}</p>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let option of pregunta.opciones; let i = index">
+            <div class="input-group">
+              <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="option.esCorrecta"
+                  aria-label="Checkbox para marcar respuesta correcta">
+              </div>
+              <input type="text" class="form-control" disabled [(ngModel)]="option.texto" placeholder="Opción {{ i + 1 }}">
+            </div>
+          </li>
+          <!--<div class="col-1">
+            <button class="btn btn-success btn-sm" (click)="reponderPregunta(pregunta.id)">Guardar</button>
+          </div>-->
+        </ul>
+      </div>
+      }
+  }
+
 </div>

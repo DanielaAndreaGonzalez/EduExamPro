@@ -1,4 +1,5 @@
 export interface Quiz {
+  idExamen?:number
   nombre: string;
   descripcion: string;
   categoria: string;

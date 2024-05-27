@@ -6,6 +6,7 @@ import { Quiz } from '../../models/Quiz';
 import { Curso } from '../../models/Curso';
 import { CursoService } from '../../services/curso.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-create',
@@ -22,8 +23,9 @@ export class QuizCreateComponent {
   };
   categories = ['Business', 'Computers & Tech', 'Education & Exams', 'Fun Quizzes', 'Miscellaneous', 'Personality Quizzes', 'Trivia'];
   cursos: Curso[] = [];
+  quizzes: Quiz[] = [];
 
-  constructor(private quizService: QuizService, private cursoService: CursoService) {}
+  constructor(private quizService: QuizService, private cursoService: CursoService,  private router: Router) {}
 
   ngOnInit(): void {
     this.cursoService.getCursos().subscribe({
@@ -34,6 +36,8 @@ export class QuizCreateComponent {
         console.error('Error al obtener cursos', error);
       }
     });
+
+    this.loadQuizzes();
   }
 
   createQuiz(): void {
@@ -46,5 +50,23 @@ export class QuizCreateComponent {
       },
       complete: () => console.log('Completado') // Esta es opcional, solo si necesitas hacer algo cuando se complete el observable.
     });
+  }
+
+  loadQuizzes() {
+    this.quizService.getQuizzes().subscribe({
+      next: (quizzes) => {
+
+        this.quizzes = quizzes;
+      },
+      error: (error) => {
+        console.error('Error al obtener quizzes', error);
+      }
+    });
+  }
+
+  agregarPreguntas(idQuiz?: number) {
+    console.log('idQuiz', idQuiz);
+    // Redireccionar a la página de edición de preguntas del quiz
+    this.router.navigate(['/edit-quiz', idQuiz]); // Asegúrate de que la ruta esté configurada correctamente
   }
 }

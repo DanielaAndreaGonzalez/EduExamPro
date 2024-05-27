@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Opcion } from '../../models/Opcion';
+import { Pregunta } from '../../models/Pregunta';
+import { PreguntaService } from '../../services/pregunta.service';
 
 @Component({
   selector: 'app-question-create',
@@ -10,23 +13,28 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './question-create.component.css'
 })
 export class QuestionCreateComponent {
-  question = '';
-  options = [
-    { text: '', isCorrect: false },
-    { text: '', isCorrect: false }
-  ];
+  opciones:Opcion []= [];
+  pregunta: Pregunta = {id:0, texto:'', opciones:this.opciones, esPublica:true};
+
+  constructor(private preguntaService:PreguntaService) { }
 
   addOption(): void {
-    this.options.push({ text: '', isCorrect: false });
+    this.opciones.push({ texto: '', esCorrecta: false });
   }
 
   removeOption(index: number): void {
-    this.options.splice(index, 1);
+    this.opciones.splice(index, 1);
   }
 
   saveQuestion(): void {
-    // Aquí enviarías la pregunta y las opciones al backend o a un servicio para ser guardadas
-    console.log('Pregunta guardada', { question: this.question, options: this.options });
+    this.pregunta.opciones = this.opciones;
+    console.log(this.pregunta);
+    this.preguntaService.createQuiz(this.pregunta).subscribe({
+      next: (pregunta) => {
+        console.log('Pregunta creada', pregunta);
+      },
+      error: (error) => console.error('Error al crear pregunta', error)
+    });
   }
 
 }

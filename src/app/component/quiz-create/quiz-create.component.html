@@ -38,4 +38,35 @@
 </div>
 
 
-<!--<app-question-create></app-question-create>-->
+<!--Lista de quizzes-->
+<div class="container mt-3">
+  <h2>Quizzes Creados</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Categoría</th>
+        <th>Fecha Disponible</th>
+        <th>Tiempo Límite</th>
+        <th>Curso</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quiz of quizzes">
+        <td>{{ quiz.nombre }}</td>
+        <td>{{ quiz.descripcion }}</td>
+        <td>{{ quiz.categoria }}</td>
+        <td>{{ quiz.fechaDisponible | date }}</td>
+        <td>{{ quiz.tiempoLimite }} minutos</td>
+        <td>{{ quiz.idCurso }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="agregarPreguntas(quiz.idExamen)">Agregar Preguntas</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
